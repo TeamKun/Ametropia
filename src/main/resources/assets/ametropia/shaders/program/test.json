@@ -1,0 +1,21 @@
+{
+  "blend": {
+    "func": "add",
+    "srcrgb": "one",
+    "dstrgb": "zero"
+  },
+  "vertex": "ametropia:test",
+  "fragment": "ametropia:test",
+  "samplers": [
+    { "name": "depthTex" },
+    { "name": "DiffuseSampler" },
+    { "name": "PrevSampler" }
+  ],
+  "uniforms": [
+    { "name": "invViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "invProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "InSize",  "type": "float",        "count": 2,  "values": [ 1.0, 1.0 ] },
+    { "name": "pos",  "type": "float",           "count": 3,  "values": [ 0.0, 0.0, 0.0 ] },
+    { "name": "eyePos",  "type": "float",           "count": 3,  "values": [ 0.0, 0.0, 0.0 ] }
+  ]
+}

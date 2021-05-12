@@ -1,0 +1,10 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT License"
+[[mods]]
+modId="ametropia"
+version="${file.jarVersion}"
+displayName="Ametropia"
+credits="KUN Dev Lab"
+authors="MORIMORI0317"
+description='''A Ikisugi Ametropia MOD'''
