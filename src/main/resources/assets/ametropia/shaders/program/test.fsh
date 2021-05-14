@@ -66,7 +66,6 @@ void main() {
             base.z+=u.z;
         }
     }
-
     base/=pow(buler/skiped, 2);
 
     gl_FragColor = vec4(base, 1);

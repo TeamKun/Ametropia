@@ -42,8 +42,15 @@ public class AmetropiaShader extends BaseShader {
         eyePositionUniform.set((float) value.x(), (float) value.y(), (float) value.z());
     }
 
-    public void setPosition(Vector3d value) {
-        
-        
+    public void setFocus(float value) {
+        focusUniform.set(value);
+    }
+
+    public void setRange(float value) {
+        rangeUniform.set(value);
+    }
+
+    public void setDifference(float value) {
+        differenceUniform.set(value);
     }
 }

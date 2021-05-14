@@ -25,5 +25,9 @@ public class AmetropiaRenderer extends ShaderBaseRenderer<AmetropiaShader> {
 
         Vector3d eyeposition = mc.player.getEyePosition(0);
         getShader().setEyePosition(position);
+
+        getShader().setFocus(100);
+        getShader().setRange(30);
+        getShader().setDifference(1.0f);
     }
 }
