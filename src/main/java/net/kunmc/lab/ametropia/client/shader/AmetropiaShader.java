@@ -10,13 +10,17 @@ public class AmetropiaShader extends BaseShader {
     private ShaderDefault positionUniform;
     private ShaderDefault eyePositionUniform;
 
+    private ShaderDefault focusUniform;
+    private ShaderDefault rangeUniform;
+    private ShaderDefault differenceUniform;
+
     public static AmetropiaShader getInstance() {
         return INSTANCE;
     }
 
     @Override
     public ResourceLocation getShaderLocation() {
-        return new ResourceLocation(Ametropia.MODID, "test");
+        return new ResourceLocation(Ametropia.MODID, "sight");
     }
 
     @Override
@@ -24,6 +28,10 @@ public class AmetropiaShader extends BaseShader {
         super.handleShaderLoad();
         positionUniform = shaderInstance.safeGetUniform("pos");
         eyePositionUniform = shaderInstance.safeGetUniform("eyePos");
+
+        focusUniform = shaderInstance.safeGetUniform("focus");
+        rangeUniform = shaderInstance.safeGetUniform("range");
+        differenceUniform = shaderInstance.safeGetUniform("difference");
     }
 
     public void setPosition(Vector3d value) {
@@ -32,5 +40,10 @@ public class AmetropiaShader extends BaseShader {
 
     public void setEyePosition(Vector3d value) {
         eyePositionUniform.set((float) value.x(), (float) value.y(), (float) value.z());
+    }
+
+    public void setPosition(Vector3d value) {
+        
+        
     }
 }
