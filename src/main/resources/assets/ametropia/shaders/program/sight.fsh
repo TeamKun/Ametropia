@@ -33,18 +33,15 @@ float objectDistance(vec2 pixpos){
 }
 
 void main() {
-    float dist = objectDistance(texCoord);
-    //  vec4 orginal = texture2D(DiffuseSampler, texCoord);
 
-    /*float f1=dist-(focus-range/2);
-    float f2=f1/range;
-    float f3=clamp(f2, 0, 1);
-    float f4=abs(0.5f-f3)*2;*/
+    float ignoreDist=20;
+
+    float dist = objectDistance(texCoord);
 
     float bulerPar=clamp(dist/100, 0, 1);
 
-    float bulerRange=floor(30*bulerPar);
-    float bulerSkip=floor(2);
+    float bulerRange=floor(10*bulerPar);
+    float bulerSkip=floor(1);
 
     if (bulerRange/bulerSkip<=0){
         gl_FragColor = vec4(texture2D(DiffuseSampler, texCoord).rgb, 1);
@@ -60,7 +57,8 @@ void main() {
             float ay=y*bulerSkip;
             vec2 up=texCoord + vec2(-oneTexel.x*(bulerRange/2) + oneTexel.x*ax, -oneTexel.y*(bulerRange/2)+ oneTexel.y*ay);
             float ud= objectDistance(up);
-            if (dist<=ud){
+
+            if (ignoreDist<=ud||dist<=ud){
                 vec4 uc = texture2D(DiffuseSampler, up);
                 base+=uc.rgb;
                 avgc++;
