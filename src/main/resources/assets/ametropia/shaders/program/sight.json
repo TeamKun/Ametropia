@@ -16,9 +16,9 @@
     { "name": "invProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
     { "name": "InSize",  "type": "float",        "count": 2,  "values": [ 1.0, 1.0 ] },
     { "name": "pos",  "type": "float",           "count": 3,  "values": [ 0.0, 0.0, 0.0 ] },
-    { "name": "eyePos",  "type": "float",           "count": 3,  "values": [ 0.0, 0.0, 0.0 ] },
     { "name": "focus",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
     { "name": "range",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
-    { "name": "difference",  "type": "float",           "count": 1,  "values": [ 0.0 ] }
+    { "name": "difference",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
+    { "name": "ignoreDist",  "type": "float",           "count": 1,  "values": [ 0.0 ] }
   ]
 }

@@ -7,11 +7,11 @@ uniform sampler2D DiffuseSampler;
 uniform sampler2D PrevSampler;
 uniform vec2 InSize;
 uniform vec3 pos;
-uniform vec3 eyePos;
 
 uniform float focus;//焦点距離
 uniform float range;//焦点範囲
 uniform float difference;//焦点の差
+uniform float ignoreDist;//最低ぼやけ無視距離
 
 varying vec2 texCoord;
 varying vec2 oneTexel;
@@ -27,19 +27,15 @@ vec3 worldpos(float depth) {
 
 float objectDistance(vec2 pixpos){
     float depth = texture2D(depthTex, pixpos).r;
-    vec3 pos = worldpos(depth);
-    float dist = distance(pos, eyePos);
+    vec3 wpos = worldpos(depth);
+    float dist = distance(wpos, pos);
     return dist;
 }
 
 void main() {
 
-    float ignoreDist=20;
-
     float dist = objectDistance(texCoord);
-
     float bulerPar=clamp(dist/100, 0, 1);
-
     float bulerRange=floor(10*bulerPar);
     float bulerSkip=floor(1);
 

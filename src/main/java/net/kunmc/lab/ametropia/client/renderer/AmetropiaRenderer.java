@@ -1,5 +1,6 @@
 package net.kunmc.lab.ametropia.client.renderer;
 
+import net.kunmc.lab.ametropia.client.SightManager;
 import net.kunmc.lab.ametropia.client.shader.AmetropiaShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Framebuffer;
@@ -23,11 +24,11 @@ public class AmetropiaRenderer extends ShaderBaseRenderer<AmetropiaShader> {
         Vector3d position = mc.gameRenderer.getMainCamera().getPosition();
         getShader().setPosition(position);
 
-        Vector3d eyeposition = mc.player.getEyePosition(0);
-        getShader().setEyePosition(position);
+        SightManager manager = SightManager.getInstance();
 
-        getShader().setFocus(100);
-        getShader().setRange(30);
-        getShader().setDifference(1.0f);
+        getShader().setFocus(manager.getFocusUniform());
+        getShader().setRange(manager.getRangeUniform());
+        getShader().setDifference(manager.getDifferenceUniform());
+        getShader().setIgnoreDist(manager.getIgnoreDist());
     }
 }
