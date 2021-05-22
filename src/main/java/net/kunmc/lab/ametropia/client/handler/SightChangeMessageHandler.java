@@ -12,7 +12,7 @@ public class SightChangeMessageHandler {
         SightManager manager = SightManager.getInstance();
 
         System.out.println(message.type.getSerializedName() + ":" + message.value);
-
+/*
         switch (message.type) {
             case IGNORE_DIST:
                 manager.setIgnoreDist(message.value);
@@ -26,6 +26,6 @@ public class SightChangeMessageHandler {
             case RANGE_UNIFORM:
                 manager.setRangeUniform(message.value);
         }
-
+*/
     }
 }

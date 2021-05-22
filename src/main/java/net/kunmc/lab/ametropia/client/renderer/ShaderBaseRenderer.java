@@ -162,4 +162,10 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
     }
 
     abstract public T getShader();
+
+    public void resized(){
+        if (depthCopyFbo != 0) {
+            deleteDepthCopyFramebuffer();
+        }
+    }
 }

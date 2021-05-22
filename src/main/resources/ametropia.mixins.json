@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.kunmc.lab.ametropia.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "ametropia.refmap.json",
+  "client": [
+    "client.MinecraftMixin"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

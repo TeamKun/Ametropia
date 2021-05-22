@@ -2,6 +2,7 @@ package net.kunmc.lab.ametropia;
 
 import net.kunmc.lab.ametropia.client.handler.RenderHandler;
 import net.kunmc.lab.ametropia.client.shader.AmetropiaShader;
+import net.kunmc.lab.ametropia.client.shader.HyperopiaShader;
 import net.kunmc.lab.ametropia.handler.ServerHandler;
 import net.kunmc.lab.ametropia.packet.PacketHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,5 +28,6 @@ public class Ametropia {
     private void doClientStuff(final FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(RenderHandler.class);
         AmetropiaShader.getInstance().init();
+        HyperopiaShader.getInstance().init();
     }
 }
