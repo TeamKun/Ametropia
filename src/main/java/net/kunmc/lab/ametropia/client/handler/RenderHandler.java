@@ -22,8 +22,8 @@ public class RenderHandler {
                 AmetropiaRenderer.getInstance().onRender(e);
         }
 
-    //    manager.setLevel((float) (System.currentTimeMillis() % 1000) / 1000f);
-
+        manager.setLevel((float) (System.currentTimeMillis() % 10000) / 10000f);
+        //       manager.setLevel(1f);
     }
 
     @SubscribeEvent

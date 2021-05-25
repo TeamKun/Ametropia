@@ -13,6 +13,7 @@ public class HyperopiaShader extends BaseShader {
     private ShaderDefault rangeUniform;
     private ShaderDefault differenceUniform;
     private ShaderDefault ignoreDist;
+    private ShaderDefault level;
 
     public static HyperopiaShader getInstance() {
         return INSTANCE;
@@ -32,6 +33,7 @@ public class HyperopiaShader extends BaseShader {
         rangeUniform = shaderInstance.safeGetUniform("range");
         differenceUniform = shaderInstance.safeGetUniform("difference");
         ignoreDist = shaderInstance.safeGetUniform("ignoreDist");
+        level = shaderInstance.safeGetUniform("level");
     }
 
     public void setPosition(Vector3d value) {
@@ -53,5 +55,9 @@ public class HyperopiaShader extends BaseShader {
 
     public void setIgnoreDist(float value) {
         ignoreDist.set(value);
+    }
+
+    public void setLevel(float value) {
+        level.set(value);
     }
 }

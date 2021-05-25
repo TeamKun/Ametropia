@@ -19,6 +19,7 @@
     { "name": "focus",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
     { "name": "range",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
     { "name": "difference",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
-    { "name": "ignoreDist",  "type": "float",           "count": 1,  "values": [ 0.0 ] }
+    { "name": "ignoreDist",  "type": "float",           "count": 1,  "values": [ 0.0 ] },
+    { "name": "level",  "type": "float",           "count": 1,  "values": [ 0.0 ] }
   ]
 }

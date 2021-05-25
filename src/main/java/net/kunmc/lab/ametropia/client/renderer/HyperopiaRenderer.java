@@ -29,9 +29,10 @@ public class HyperopiaRenderer extends ShaderBaseRenderer<HyperopiaShader> {
 
         float level = manager.getLevel();
 
-        getShader().setFocus(level);
+   /*     getShader().setFocus(level);
         getShader().setRange(level);
         getShader().setDifference(level);
-        getShader().setIgnoreDist(level * 100f);
+        getShader().setIgnoreDist(level);*/
+        getShader().setLevel(level);
     }
 }

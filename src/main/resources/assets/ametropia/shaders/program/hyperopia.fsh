@@ -13,6 +13,8 @@ uniform float range;//焦点範囲
 uniform float difference;//焦点の差
 uniform float ignoreDist;//最低ぼやけ無視距離
 
+uniform float level;//ぼやけ
+
 varying vec2 texCoord;
 varying vec2 oneTexel;
 
@@ -32,41 +34,55 @@ float objectDistance(vec2 pixpos){
     return dist;
 }
 
-void main() {
-    float dist = objectDistance(texCoord);
-    float bulerPar=clamp(dist/100, 0, 1);
-    float bulerRange=floor(10*bulerPar);
-    float bulerSkip=1;
+vec3 bulerd(float par){
+    float samplete=par*(5+level*10);
+    float skiped=samplete/5;
 
-    float blCont=max(bulerRange/bulerSkip, 0.1);
+    vec3 base = texture2D(DiffuseSampler, texCoord).rgb;
+    float avgc=1;
 
+    for (float x = -samplete; x < samplete; x+=skiped){
+        for (float y = -samplete; y < samplete; y+=skiped){
+            vec2 spp=texCoord + vec2(oneTexel.x*x, oneTexel.y*y);
 
-    //bulerRange=min(bulerRange,0);
+            vec4 uc = texture2D(DiffuseSampler, spp);
+            base+=uc.rgb;
 
-    /*  if (blCont==0){
-          gl_FragColor = vec4(texture2D(DiffuseSampler, texCoord).rgb, 1);
-          return;
-      }*/
-
-    vec3 base = vec3(0);
-    float avgc=0;
-
-    for (float x = 0; x < blCont; x++){
-        float ax =x*bulerSkip;
-        for (float y = 0; y < bulerRange/bulerSkip; y++){
-            float ay=y*bulerSkip;
-            vec2 up=texCoord + vec2(-oneTexel.x*(bulerRange/2) + oneTexel.x*ax, -oneTexel.y*(bulerRange/2)+ oneTexel.y*ay);
-            float ud= objectDistance(up);
-
-            if (ignoreDist<=ud||dist<=ud){
-                vec4 uc = texture2D(DiffuseSampler, up);
-                base+=uc.rgb;
-                avgc++;
-            }
+            avgc++;
         }
     }
 
     base/=avgc;
+    return base;
+}
 
-    gl_FragColor = vec4(base, 1);
+void main() {
+    float dist = objectDistance(texCoord);
+    float bulerPar=clamp(dist/100, 0, 1);
+    //  float bulerRange=15*bulerPar;
+    //  float bulerSkip=1;
+
+    //   float blCont=bulerRange/bulerSkip;
+    /*
+       vec3 base = texture2D(DiffuseSampler, texCoord).rgb;
+       float avgc=1;
+
+       for (float x = 0; x < blCont; x++){
+            float ax =x*bulerSkip;
+            for (float y = 0; y < bulerRange/bulerSkip; y++){
+                float ay=y*bulerSkip;
+                vec2 up=texCoord + vec2(-oneTexel.x*(bulerRange/2) + oneTexel.x*ax, -oneTexel.y*(bulerRange/2)+ oneTexel.y*ay);
+                float ud= objectDistance(up);
+
+                if (ignoreDist<=ud||dist<=ud){
+                    vec4 uc = texture2D(DiffuseSampler, up);
+                    base+=uc.rgb;
+                    avgc++;
+                }
+            }
+        }
+
+        base/=avgc;*/
+
+    gl_FragColor = vec4(bulerd(bulerPar).rgb, 1);
 }
