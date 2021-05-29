@@ -4,8 +4,8 @@
     "srcrgb": "one",
     "dstrgb": "zero"
   },
-  "vertex": "ametropia:hyperopia",
-  "fragment": "ametropia:hyperopia",
+  "vertex": "ametropia:myopia",
+  "fragment": "ametropia:myopia",
   "samplers": [
     { "name": "depthTex" },
     { "name": "DiffuseSampler" },

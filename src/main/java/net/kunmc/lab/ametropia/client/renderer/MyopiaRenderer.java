@@ -1,23 +1,23 @@
 package net.kunmc.lab.ametropia.client.renderer;
 
 import net.kunmc.lab.ametropia.client.SightManager;
-import net.kunmc.lab.ametropia.client.shader.HyperopiaShader;
+import net.kunmc.lab.ametropia.client.shader.MyopiaShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.math.vector.Vector3d;
 
-public class HyperopiaRenderer extends ShaderBaseRenderer<HyperopiaShader> {
-    private static final HyperopiaRenderer INSTANCE = new HyperopiaRenderer();
+public class MyopiaRenderer extends ShaderBaseRenderer<MyopiaShader> {
+    private static final MyopiaRenderer INSTANCE = new MyopiaRenderer();
     private static final Minecraft mc = Minecraft.getInstance();
 
-    public static HyperopiaRenderer getInstance() {
+    public static MyopiaRenderer getInstance() {
 
         return INSTANCE;
     }
 
     @Override
-    public HyperopiaShader getShader() {
-        return HyperopiaShader.getInstance();
+    public MyopiaShader getShader() {
+        return MyopiaShader.getInstance();
     }
 
     @Override
@@ -28,3 +28,5 @@ public class HyperopiaRenderer extends ShaderBaseRenderer<HyperopiaShader> {
         getShader().setLevel(SightManager.getInstance().getLevel());
     }
 }
+
+

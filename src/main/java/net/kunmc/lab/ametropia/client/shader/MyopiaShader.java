@@ -5,19 +5,19 @@ import net.minecraft.client.shader.ShaderDefault;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 
-public class HyperopiaShader extends BaseShader {
-    private static final HyperopiaShader INSTANCE = new HyperopiaShader();
+public class MyopiaShader extends BaseShader {
+    private static final MyopiaShader INSTANCE = new MyopiaShader();
     private ShaderDefault positionUniform;
 
     private ShaderDefault level;
 
-    public static HyperopiaShader getInstance() {
+    public static MyopiaShader getInstance() {
         return INSTANCE;
     }
 
     @Override
     public ResourceLocation getShaderLocation() {
-        return new ResourceLocation(Ametropia.MODID, "hyperopia");
+        return new ResourceLocation(Ametropia.MODID, "myopia");
     }
 
     @Override

@@ -9,7 +9,7 @@ import net.minecraft.util.math.MathHelper;
 public class SightManager {
     private static final SightManager INSTANCE = new SightManager();
     private static final Minecraft mc = Minecraft.getInstance();
-    private AmetropiaType type = AmetropiaType.HYPEROPIA;
+    private AmetropiaType type = AmetropiaType.MYOPIA;
     private float level;
 
 
