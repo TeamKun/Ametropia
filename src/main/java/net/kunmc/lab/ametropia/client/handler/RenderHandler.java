@@ -1,8 +1,6 @@
 package net.kunmc.lab.ametropia.client.handler;
 
 import net.kunmc.lab.ametropia.client.SightManager;
-import net.kunmc.lab.ametropia.client.renderer.HyperopiaRenderer;
-import net.kunmc.lab.ametropia.client.renderer.MyopiaRenderer;
 import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -15,15 +13,8 @@ public class RenderHandler {
     @SubscribeEvent
     public static void onWorldRender(RenderWorldLastEvent e) {
         SightManager manager = SightManager.getInstance();
-        if (manager.isEnable()) {
-            if (manager.getType() == AmetropiaType.HYPEROPIA)
-                HyperopiaRenderer.getInstance().onRender(e);
-            else if (manager.getType() == AmetropiaType.MYOPIA)
-                MyopiaRenderer.getInstance().onRender(e);
-        }
-
         manager.setLevel((float) (System.currentTimeMillis() % 10000) / 10000f);
-        //       manager.setLevel(0.5f);
+        //   manager.setLevel(1f);
     }
 
     @SubscribeEvent

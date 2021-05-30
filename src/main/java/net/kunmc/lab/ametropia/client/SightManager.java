@@ -1,5 +1,7 @@
 package net.kunmc.lab.ametropia.client;
 
+import net.kunmc.lab.ametropia.client.renderer.AmetropiaRenderer;
+import net.kunmc.lab.ametropia.client.renderer.HyperopiaRenderer;
 import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.kunmc.lab.ametropia.item.GlassesItem;
 import net.minecraft.client.Minecraft;
@@ -9,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 public class SightManager {
     private static final SightManager INSTANCE = new SightManager();
     private static final Minecraft mc = Minecraft.getInstance();
-    private AmetropiaType type = AmetropiaType.MYOPIA;
+    private AmetropiaType type = AmetropiaType.HYPEROPIA;
     private float level;
 
 
@@ -30,6 +32,13 @@ public class SightManager {
     }
 
     public void setLevel(float level) {
-        this.level = MathHelper.clamp(level,0,1);
+        this.level = MathHelper.clamp(level, 0, 1);
+    }
+
+    public void resize() {
+        if (mc.level != null) {
+            AmetropiaRenderer.getInstance().resized();
+            HyperopiaRenderer.getInstance().resized();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package net.kunmc.lab.ametropia.client.renderer;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.kunmc.lab.ametropia.client.shader.BaseShader;
@@ -24,11 +25,20 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
     private int depthCopyColorBuffer;
     private int depthCopyDepthBuffer;
 
-    public void onRender(RenderWorldLastEvent e) {
+  /*  public void onRender(RenderWorldLastEvent e) {
         if (depthCopyFbo == 0) {
             createDepthCopyFramebuffer();
         }
         render(e.getMatrixStack().last().pose(), e.getProjectionMatrix());
+    }*/
+
+    public void doRender(final MatrixStack matrixStack, final Matrix4f projectionMatrix) {
+
+        if (depthCopyFbo == 0) {
+            createDepthCopyFramebuffer();
+        }
+
+        render(matrixStack.last().pose(), projectionMatrix);
     }
 
     public void render(Matrix4f viewMatrix, Matrix4f projectionMatrix) {
@@ -59,7 +69,7 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
 
     }
 
-    public void setter(Framebuffer framebuffer){
+    public void setter(Framebuffer framebuffer) {
 
     }
 
@@ -156,14 +166,22 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
     }
 
     private void updateDepthTexture(final Framebuffer framebuffer) {
+        //   GlStateManager._glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, framebuffer.frameBufferId);
+        //   GlStateManager._glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, depthCopyFbo);
+        //   GL30.glBlitFramebuffer(0, 0, framebuffer.width, framebuffer.height, 0, 0, framebuffer.width, framebuffer.height, GL30.GL_DEPTH_BUFFER_BIT, GL30.GL_NEAREST);
+
+
         GlStateManager._glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, framebuffer.frameBufferId);
         GlStateManager._glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, depthCopyFbo);
-        GL30.glBlitFramebuffer(0, 0, framebuffer.width, framebuffer.height, 0, 0, framebuffer.width, framebuffer.height, GL30.GL_DEPTH_BUFFER_BIT, GL30.GL_NEAREST);
+        GL30.glBlitFramebuffer(0, 0, framebuffer.width, framebuffer.height,
+                0, 0, framebuffer.width, framebuffer.height,
+                GL30.GL_DEPTH_BUFFER_BIT, GL30.GL_NEAREST);
+
     }
 
     abstract public T getShader();
 
-    public void resized(){
+    public void resized() {
         if (depthCopyFbo != 0) {
             deleteDepthCopyFramebuffer();
         }

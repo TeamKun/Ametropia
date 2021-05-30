@@ -37,7 +37,7 @@ vec3 bulerd(float par, float dist){
     vec3 base = org;
     float avgc=1;
 
-    float ignoreDist=50-(40*level);
+    float ignoreDist=0;//50-(40*level);
 
     for (float x = -samplete; x < samplete; x+=skiped){
         for (float y = -samplete; y < samplete; y+=skiped){
@@ -62,5 +62,5 @@ vec3 bulerd(float par, float dist){
 void main() {
     float dist = objectDistance(texCoord);
     float bulerPar=clamp(dist/100, 0, 1);
-    gl_FragColor = vec4(bulerd(bulerPar, dist).rgb, 1);
+    gl_FragColor = vec4(bulerd(1-bulerPar, dist).rgb, 1);
 }

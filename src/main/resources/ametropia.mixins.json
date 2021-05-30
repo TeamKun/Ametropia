@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "ametropia.refmap.json",
   "client": [
-    "client.MinecraftMixin"
+    "client.MinecraftMixin",
+    "client.WorldRendererMixin"
   ],
   "mixins": [
   ],
