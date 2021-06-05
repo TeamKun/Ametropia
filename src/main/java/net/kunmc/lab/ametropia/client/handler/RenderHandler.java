@@ -13,12 +13,17 @@ public class RenderHandler {
     @SubscribeEvent
     public static void onWorldRender(RenderWorldLastEvent e) {
         SightManager manager = SightManager.getInstance();
-        manager.setLevel((float) (System.currentTimeMillis() % 10000) / 10000f);
+        //   manager.setLevel((float) (System.currentTimeMillis() % 10000) / 10000f);
         //   manager.setLevel(1f);
+        //  GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        manager.render(e.getMatrixStack(), e.getProjectionMatrix());
+        //      System.out.println("test");
     }
+
 
     @SubscribeEvent
     public static void onRender(RenderGameOverlayEvent.Text e) {
+
         if (mc.options.renderDebug) {
 
             boolean oneFlag = false;

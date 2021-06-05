@@ -11,7 +11,9 @@ public class SightChangeMessageHandler {
         ctx.get().setPacketHandled(true);
         SightManager manager = SightManager.getInstance();
 
-        System.out.println(message.type.getSerializedName() + ":" + message.value);
+        //  System.out.println(message.type.getSerializedName() + ":" + message.value);
+        manager.setLevel(message.level);
+        manager.setType(message.type);
 /*
         switch (message.type) {
             case IGNORE_DIST:
