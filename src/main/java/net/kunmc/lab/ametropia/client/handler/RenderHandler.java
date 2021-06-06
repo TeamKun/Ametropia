@@ -43,7 +43,7 @@ public class RenderHandler {
             }
 
             SightManager manager = SightManager.getInstance();
-            e.getLeft().add(dr + 1, "Ametropia Info: [" + "Mode: " + manager.getType().getSerializedName() + (manager.getType() == AmetropiaType.NONE ? "" : ", Level: " + manager.getLevel()) + "]");
+            e.getLeft().add(dr + 1, "Ametropia Info: [" + "Mode: " + manager.getType().getComponent().getString() + (manager.getType() == AmetropiaType.NONE ? "" : ", Level: " + manager.getLevel()) + "]");
         }
     }
 }

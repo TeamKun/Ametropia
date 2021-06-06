@@ -1,6 +1,7 @@
 package net.kunmc.lab.ametropia.data;
 
 import net.kunmc.lab.ametropia.util.NBTUtils;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.SharedConstants;
@@ -53,6 +54,32 @@ public class AmetropiaManager implements INBTSerializable<CompoundNBT> {
 
     public void unload() {
         playerStates.clear();
+    }
+
+    public AmetropiaState getPlayerState(PlayerEntity player) {
+        UUID id = player.getGameProfile().getId();
+        if (!playerStates.containsKey(id))
+            playerStates.put(id, new AmetropiaState(AmetropiaType.NONE, 0));
+
+        return playerStates.get(id);
+    }
+
+    public void setPlayerStateType(PlayerEntity player, AmetropiaType type) {
+        UUID id = player.getGameProfile().getId();
+
+        if (!playerStates.containsKey(id))
+            playerStates.put(id, new AmetropiaState(AmetropiaType.NONE, 0));
+
+        playerStates.get(id).setType(type);
+    }
+
+    public void setPlayerStateLevel(PlayerEntity player, float level) {
+        UUID id = player.getGameProfile().getId();
+
+        if (!playerStates.containsKey(id))
+            playerStates.put(id, new AmetropiaState(AmetropiaType.NONE, 0));
+
+        playerStates.get(id).setLevel(level);
     }
 
     public void load(File file) {

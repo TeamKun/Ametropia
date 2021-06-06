@@ -1,6 +1,9 @@
 package net.kunmc.lab.ametropia.data;
 
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.text.TranslationTextComponent;
+
+import java.util.Locale;
 
 public enum AmetropiaType implements IStringSerializable {
     NONE("None"),
@@ -24,4 +27,9 @@ public enum AmetropiaType implements IStringSerializable {
     public String getSerializedName() {
         return name;
     }
+
+    public TranslationTextComponent getComponent() {
+        return new TranslationTextComponent("ametropiatype." + getSerializedName().toLowerCase(Locale.ROOT));
+    }
+
 }

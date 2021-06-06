@@ -10,24 +10,8 @@ public class SightChangeMessageHandler {
     public static void reversiveMessage(SightChangeMessage message, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().setPacketHandled(true);
         SightManager manager = SightManager.getInstance();
-
-        //  System.out.println(message.type.getSerializedName() + ":" + message.value);
-        manager.setLevel(message.level);
+        if (message.level >= 0)
+            manager.setLevel(message.level);
         manager.setType(message.type);
-/*
-        switch (message.type) {
-            case IGNORE_DIST:
-                manager.setIgnoreDist(message.value);
-                break;
-            case FOCUS_UNIFORM:
-                manager.setFocusUniform(message.value);
-                break;
-            case DIFFERENCE_UNIFORM:
-                manager.setDifferenceUniform(message.value);
-                break;
-            case RANGE_UNIFORM:
-                manager.setRangeUniform(message.value);
-        }
-*/
     }
 }

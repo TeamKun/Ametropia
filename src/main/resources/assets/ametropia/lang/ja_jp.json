@@ -2,5 +2,13 @@
   "_comment.i": "item",
   "item.ametropia.glasses": "眼鏡",
   "_comment.c": "command",
+  "commands.sight.type.success.single": "プレイヤー %s の視力を %s に変更しました",
+  "commands.sight.type.success.multiple": "%s 人のプレイヤーの視力を %s に変更しました",
+  "commands.sight.level.success.single": "プレイヤー %s の視力レベルを %s レベルに変更しました",
+  "commands.sight.level.success.multiple": "%s 人のプレイヤーの視力レベルを %s レベルに変更しました",
+  "_comment.o": "other",
+  "ametropiatype.none": "無効",
+  "ametropiatype.hyperopia": "遠視",
+  "ametropiatype.myopia": "近視",
   "_comment.l": "last"
 }
