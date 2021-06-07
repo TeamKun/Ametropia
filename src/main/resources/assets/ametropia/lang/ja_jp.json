@@ -6,6 +6,8 @@
   "commands.sight.type.success.multiple": "%s 人のプレイヤーの視力を %s に変更しました",
   "commands.sight.level.success.single": "プレイヤー %s の視力レベルを %s レベルに変更しました",
   "commands.sight.level.success.multiple": "%s 人のプレイヤーの視力レベルを %s レベルに変更しました",
+  "commands.sight.random.success.single": "プレイヤー %s の視力をランダムに変更しました",
+  "commands.sight.random.success.multiple": "%s 人のプレイヤーの視力をランダムに変更しました",
   "_comment.o": "other",
   "ametropiatype.none": "無効",
   "ametropiatype.hyperopia": "遠視",
