@@ -4,9 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "ametropia.refmap.json",
   "client": [
+    "client.DebugOverlayGuiMixin",
     "client.GameRendererMixin",
-    "client.MinecraftMixin",
-    "client.WorldRendererMixin"
+    "client.MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1
