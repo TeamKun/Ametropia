@@ -31,8 +31,11 @@ public class SightManager {
     }
 
     public void setType(AmetropiaType type) {
+
         this.type = type;
+
     }
+
 
     public boolean isEnable() {
         return mc.player != null && type != AmetropiaType.NONE && !(mc.player.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof GlassesItem);
