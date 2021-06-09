@@ -1,7 +1,6 @@
 package net.kunmc.lab.ametropia.client;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.kunmc.lab.ametropia.client.renderer.AmetropiaRenderer;
 import net.kunmc.lab.ametropia.client.renderer.HyperopiaRenderer;
 import net.kunmc.lab.ametropia.client.renderer.MyopiaRenderer;
 import net.kunmc.lab.ametropia.data.AmetropiaType;
@@ -16,7 +15,7 @@ public class SightManager {
     private static final Minecraft mc = Minecraft.getInstance();
     private AmetropiaType type = AmetropiaType.HYPEROPIA;
     private float level;
-
+    private long lastResize;
 
     public static SightManager getInstance() {
         return INSTANCE;
@@ -31,11 +30,11 @@ public class SightManager {
     }
 
     public void setType(AmetropiaType type) {
-
+        boolean flg = this.type != type;
         this.type = type;
-
+        if (flg)
+            resize();
     }
-
 
     public boolean isEnable() {
         return mc.player != null && type != AmetropiaType.NONE && !(mc.player.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof GlassesItem);
@@ -47,9 +46,10 @@ public class SightManager {
 
     public void resize() {
         if (mc.level != null) {
-            AmetropiaRenderer.getInstance().resized();
+            MyopiaRenderer.getInstance().resized();
             HyperopiaRenderer.getInstance().resized();
         }
+        lastResize = System.currentTimeMillis();
     }
 
     public void render(MatrixStack matrixStack, Matrix4f projectionMatrix) {
@@ -59,5 +59,10 @@ public class SightManager {
             else if (getType() == AmetropiaType.MYOPIA)
                 MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix);
         }
+    }
+
+    public void resizeTick() {
+        if (System.currentTimeMillis() - lastResize > 1000 * 60)
+            resize();
     }
 }

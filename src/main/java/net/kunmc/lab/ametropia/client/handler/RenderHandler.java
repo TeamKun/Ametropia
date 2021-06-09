@@ -6,9 +6,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class RenderHandler {
 
+
     @SubscribeEvent
     public static void onWorldRender(RenderWorldLastEvent e) {
         SightManager manager = SightManager.getInstance();
         manager.render(e.getMatrixStack(), e.getProjectionMatrix());
+        manager.resizeTick();
     }
 }

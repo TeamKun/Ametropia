@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ametropia:glasses"
+    ]
+  },
+  "criteria": {
+    "has_at_enable": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "has_at_enable"
+    ]
+  ]
+}

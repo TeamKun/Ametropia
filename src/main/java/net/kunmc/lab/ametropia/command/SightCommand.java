@@ -49,8 +49,7 @@ public class SightCommand {
             if (level >= 0)
                 manager.setPlayerStateLevel(serverplayerentity, level);
 
-            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverplayerentity), new SightChangeMessage(type, level));
-
+            PacketHandler.sendSightChangePacket(serverplayerentity, type, level);
             i++;
 
             ls = target;
@@ -79,7 +78,7 @@ public class SightCommand {
             manager.setPlayerStateType(serverplayerentity, type);
             manager.setPlayerStateLevel(serverplayerentity, level);
 
-            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverplayerentity), new SightChangeMessage(type, level));
+            PacketHandler.sendSightChangePacket(serverplayerentity, type, level);
 
             i++;
             ls = target;

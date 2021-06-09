@@ -8,6 +8,9 @@
     "client.GameRendererMixin",
     "client.MinecraftMixin"
   ],
+  "mixins": [
+    "MinecraftServerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
