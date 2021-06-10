@@ -21,9 +21,8 @@ public class HyperopiaRenderer extends ShaderBaseRenderer<HyperopiaShader> {
     }
 
     @Override
-    public void setter(Framebuffer framebuffer) {
-        Vector3d position = mc.gameRenderer.getMainCamera().getPosition();
-        getShader().setPosition(position);
+    public void setter(Framebuffer framebuffer, float parTick) {
+        getShader().setPosition(mc.player.getEyePosition(parTick));
 
         getShader().setLevel(SightManager.getInstance().getLevel());
     }

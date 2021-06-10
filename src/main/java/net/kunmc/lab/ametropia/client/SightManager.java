@@ -52,12 +52,12 @@ public class SightManager {
         lastResize = System.currentTimeMillis();
     }
 
-    public void render(MatrixStack matrixStack, Matrix4f projectionMatrix) {
+    public void render(MatrixStack matrixStack, Matrix4f projectionMatrix, float parTick) {
         if (isEnable()) {
             if (getType() == AmetropiaType.HYPEROPIA)
-                HyperopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix);
+                HyperopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
             else if (getType() == AmetropiaType.MYOPIA)
-                MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix);
+                MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
         }
     }
 

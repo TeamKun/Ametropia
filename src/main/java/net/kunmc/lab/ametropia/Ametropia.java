@@ -14,6 +14,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
 @Mod(Ametropia.MODID)
 public class Ametropia {
     private static final Logger LOGGER = LogManager.getLogger(Ametropia.class);
@@ -27,15 +36,26 @@ public class Ametropia {
 
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(ServerHandler.class);
-        LOGGER.info("\n" +
-                "    \u001b[00;43m ######  ### ###   ######   #####   ##   ##   #####    ###### \u001b[00m\n" +
-                "    \u001b[00;43m   ##     ## ##      ##    ##   ##  ##   ##  ##   ##     ##   \u001b[00m\n" +
-                "    \u001b[00;43m   ##     ####       ##    ##       ##   ##  ##          ##   \u001b[00m\n" +
-                "    \u001b[00;43m   ##     ###        ##     #####   ##   ##  ## ####     ##   \u001b[00m\n" +
-                "    \u001b[00;43m   ##     ####       ##         ##  ##   ##  ##   ##     ##   \u001b[00m\n" +
-                "    \u001b[00;43m   ##     ## ##      ##    ##   ##  ##   ##  ##   ##     ##   \u001b[00m\n" +
-                "\u001b[00;32mThe \u001b[00;43m ######  ### ###   ######   #####    #####    #####    ###### \u001b[00;31m Shader System...\u001b[00m" +
-                "");
+
+        try {
+            LOGGER.info(new String(inputStreamToByteArray(new GZIPInputStream(new ByteArrayInputStream(Base64.getDecoder().decode("H4sIAAAAAAAAAONSAALpaAMDaxPjXAVlMFAA0WCsABdRQNAIAiICUwMyJZcLxTyoSjAFZSnA9EAJTAaMwm8ezDhk8zANRhYkYB6KWiz+hQQJue6DM8n1L7nhBzbL2Cg3JCOVpHjGxYDEs7WxYa5CcEZiSmqRQnBlcUlqrp6eHthCADAHD6dRAgAA")))), StandardCharsets.UTF_8));
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private static byte[] inputStreamToByteArray(InputStream stream) throws IOException {
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        while (true) {
+            int len = stream.read(buffer);
+            if (len < 0) {
+                break;
+            }
+            bout.write(buffer, 0, len);
+        }
+        return bout.toByteArray();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

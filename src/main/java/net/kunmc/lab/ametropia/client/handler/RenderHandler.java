@@ -10,7 +10,7 @@ public class RenderHandler {
     @SubscribeEvent
     public static void onWorldRender(RenderWorldLastEvent e) {
         SightManager manager = SightManager.getInstance();
-        manager.render(e.getMatrixStack(), e.getProjectionMatrix());
+        manager.render(e.getMatrixStack(), e.getProjectionMatrix(), e.getPartialTicks());
         manager.resizeTick();
     }
 }

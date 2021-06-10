@@ -13,7 +13,6 @@ import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.FramebufferConstants;
 import net.minecraft.client.util.JSONBlendingMode;
 import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
@@ -32,16 +31,16 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
         render(e.getMatrixStack().last().pose(), e.getProjectionMatrix());
     }*/
 
-    public void doRender(final MatrixStack matrixStack, final Matrix4f projectionMatrix) {
+    public void doRender(final MatrixStack matrixStack, final Matrix4f projectionMatrix, float parTick) {
 
         if (depthCopyFbo == 0) {
             createDepthCopyFramebuffer();
         }
 
-        render(matrixStack.last().pose(), projectionMatrix);
+        render(matrixStack.last().pose(), projectionMatrix, parTick);
     }
 
-    public void render(Matrix4f viewMatrix, Matrix4f projectionMatrix) {
+    public void render(Matrix4f viewMatrix, Matrix4f projectionMatrix, float parTick) {
         Framebuffer framebuffer = mc.getMainRenderTarget();
         updateDepthTexture(framebuffer);
 
@@ -56,7 +55,7 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
         getShader().setDiffuseSampler(mc.getMainRenderTarget()::getColorTextureId);
         getShader().setInSize(framebuffer.width, framebuffer.height);
 
-        setter(framebuffer);
+        setter(framebuffer, parTick);
 
 
         RESET_BLEND_STATE.apply();
@@ -69,7 +68,7 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
 
     }
 
-    public void setter(Framebuffer framebuffer) {
+    public void setter(Framebuffer framebuffer, float parTick) {
 
     }
 

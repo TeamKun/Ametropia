@@ -22,45 +22,45 @@ vec3 worldpos(float depth) {
     return pos + worldSpacePosition.xyz;
 }
 
-float objectDistance(vec2 pixpos){
-    float depth = texture2D(depthTex, pixpos).r;
+float objectDistance(float depth){
     vec3 wpos = worldpos(depth);
     float dist = distance(wpos, pos);
     return dist;
 }
 
-vec3 bulerd(float par, float dist){
-    float samplete=par*(5+level*10);
+vec3 bulerd(float par, float dist, float Bdepth){
+
+    float ignoreDist=60-(30*level);
+    float lines=30;
+    float ina= clamp((dist-ignoreDist)/lines, 0, 1);
+    float samplete=par*(5+level*10)*ina;
     float skiped=samplete/5;
 
     vec3 org=texture2D(DiffuseSampler, texCoord).rgb;
     vec3 base = org;
     float avgc=1;
-
-    float ignoreDist=50-(40*level);
-
-    for (float x = -samplete; x < samplete; x+=skiped){
-        for (float y = -samplete; y < samplete; y+=skiped){
-            vec2 spp=texCoord + vec2(oneTexel.x*x, oneTexel.y*y);
-
-            float ud=objectDistance(spp);
-
-            if (dist>=ignoreDist||dist<=ud){
-                vec4 uc = texture2D(DiffuseSampler, spp);
-                base+=uc.rgb;
-            } else {
-                base+=org;
+    if (Bdepth < 1||dist>=ignoreDist){
+        for (float x = -samplete; x < samplete; x+=skiped){
+            for (float y = -samplete; y < samplete; y+=skiped){
+                vec2 spp=texCoord + vec2(oneTexel.x*x, oneTexel.y*y);
+                float depth = texture2D(depthTex, spp).r;
+                float ud=objectDistance(depth);
+                if ((dist>=ignoreDist&&ignoreDist<=ud)||dist<=ud){
+                    vec4 uc = texture2D(DiffuseSampler, spp);
+                    base+=uc.rgb;
+                    avgc++;
+                }
             }
-            avgc++;
         }
     }
-
     base/=avgc;
     return base;
 }
 
 void main() {
-    float dist = objectDistance(texCoord);
+    float depth = texture2D(depthTex, texCoord).r;
+
+    float dist = objectDistance(depth);
     float bulerPar=clamp(dist/100, 0, 1);
-    gl_FragColor = vec4(bulerd(bulerPar, dist).rgb, 1);
+    gl_FragColor = vec4(bulerd(bulerPar, dist, depth).rgb, 1);
 }
