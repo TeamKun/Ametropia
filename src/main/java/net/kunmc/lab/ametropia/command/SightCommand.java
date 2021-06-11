@@ -58,7 +58,7 @@ public class SightCommand {
         if (i == 1) {
             src.sendSuccess(new TranslationTextComponent("commands.sight." + cy + ".success.single", TextComponentUtils.getDisplayName(ls), changeFlg ? type.getComponent() : level), true);
         } else {
-            src.sendSuccess(new TranslationTextComponent("commands.sight." + cy + ".success.multiple", i, changeFlg ? type : level), true);
+            src.sendSuccess(new TranslationTextComponent("commands.sight." + cy + ".success.multiple", i, changeFlg ? type.getComponent() : level), true);
         }
 
         return i;
