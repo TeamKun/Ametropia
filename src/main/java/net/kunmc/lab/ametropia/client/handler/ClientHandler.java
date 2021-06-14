@@ -1,7 +1,6 @@
 package net.kunmc.lab.ametropia.client.handler;
 
-import net.kunmc.lab.ametropia.client.SightManager;
-import net.kunmc.lab.ametropia.data.AmetropiaType;
+import net.kunmc.lab.ametropia.client.data.SightManager;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 

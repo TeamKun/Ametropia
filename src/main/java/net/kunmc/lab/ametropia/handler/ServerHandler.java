@@ -4,6 +4,7 @@ import net.kunmc.lab.ametropia.command.AMCommands;
 import net.kunmc.lab.ametropia.data.AmetropiaManager;
 import net.kunmc.lab.ametropia.item.AMItems;
 import net.kunmc.lab.ametropia.packet.PacketHandler;
+import net.kunmc.lab.ametropia.packet.SightChangeMessage;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.SoundCategory;
@@ -22,7 +23,7 @@ public class ServerHandler {
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent e) {
         AmetropiaManager manager = AmetropiaManager.getInstance();
-        PacketHandler.sendSightChangePacket((ServerPlayerEntity) e.getPlayer(), manager.getPlayerState(e.getPlayer()).getType(), manager.getPlayerState(e.getPlayer()).getLevel());
+        PacketHandler.sendSightChangePacket((ServerPlayerEntity) e.getPlayer(), SightChangeMessage.ChangeType.ALL,manager.getPlayerState(e.getPlayer()).getLevel(), manager.getPlayerState(e.getPlayer()).getRange());
     }
 
     @SubscribeEvent

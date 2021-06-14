@@ -1,6 +1,7 @@
 {
   "_comment.i": "item",
   "item.ametropia.glasses": "Glasses",
+  "item.ametropia.glasses.dioptre.desc": "Dioptre: %sD",
   "_comment.c": "command",
   "commands.sight.type.success.single": "Changed the eyesight of player %s to %s",
   "commands.sight.type.success.multiple": "Changed the eyesight of %s players to %s",
@@ -12,5 +13,6 @@
   "ametropiatype.none": "None",
   "ametropiatype.hyperopia": "Hyperopia",
   "ametropiatype.myopia": "Myopia",
+  "itemGroup.ametropia": "Ametropia",
   "_comment.l": "last"
 }

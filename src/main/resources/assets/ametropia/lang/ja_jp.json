@@ -1,6 +1,7 @@
 {
   "_comment.i": "item",
   "item.ametropia.glasses": "眼鏡",
+  "item.ametropia.glasses.dioptre.desc": "度数: %sD",
   "_comment.c": "command",
   "commands.sight.type.success.single": "プレイヤー %s の視力を %s に変更しました",
   "commands.sight.type.success.multiple": "%s 人のプレイヤーの視力を %s に変更しました",
@@ -12,5 +13,6 @@
   "ametropiatype.none": "無効",
   "ametropiatype.hyperopia": "遠視",
   "ametropiatype.myopia": "近視",
+  "itemGroup.ametropia": "近視/遠視MOD",
   "_comment.l": "last"
 }

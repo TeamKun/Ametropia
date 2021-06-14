@@ -5,32 +5,59 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.kunmc.lab.ametropia.Ametropia;
 import net.kunmc.lab.ametropia.data.AmetropiaManager;
-import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.kunmc.lab.ametropia.packet.PacketHandler;
 import net.kunmc.lab.ametropia.packet.SightChangeMessage;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.GameProfileArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.TextComponentUtils;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.Collection;
-import java.util.Random;
 
 public class SightCommand {
     public static void register(CommandDispatcher<CommandSource> d) {
         d.register(Commands.literal(Ametropia.MODID).requires((source) -> source.hasPermission(2))
                 .then(Commands.argument("targets", GameProfileArgument.gameProfile())
+                        .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg()).executes((context) -> setClientValue(context.getSource(), SightChangeMessage.ChangeType.LEVEL, FloatArgumentType.getFloat(context, "value"), 0, GameProfileArgument.getGameProfiles(context, "targets")))))));
+      /*  d.register(Commands.literal(Ametropia.MODID).requires((source) -> source.hasPermission(2))
+                .then(Commands.argument("targets", GameProfileArgument.gameProfile())
                         .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg(0, 1)).executes((context) -> setClientValue(context.getSource(), null, FloatArgumentType.getFloat(context, "value"), GameProfileArgument.getGameProfiles(context, "targets")))))
                         .then(Commands.literal("type").then(Commands.literal("none").executes((context) -> setClientValue(context.getSource(), AmetropiaType.NONE, -1, GameProfileArgument.getGameProfiles(context, "targets"))))
                                 .then(Commands.literal("hyperopia").executes((context) -> setClientValue(context.getSource(), AmetropiaType.HYPEROPIA, -1, GameProfileArgument.getGameProfiles(context, "targets"))))
                                 .then(Commands.literal("myopia").executes((context) -> setClientValue(context.getSource(), AmetropiaType.MYOPIA, -1, GameProfileArgument.getGameProfiles(context, "targets")))))
-                        .then(Commands.literal("random").executes((context) -> setRandomClientValue(context.getSource(), GameProfileArgument.getGameProfiles(context, "targets"))))));
+                        .then(Commands.literal("random").executes((context) -> setRandomClientValue(context.getSource(), GameProfileArgument.getGameProfiles(context, "targets"))))));*/
     }
 
-    private static int setClientValue(CommandSource src, AmetropiaType type, float level, Collection<GameProfile> targets) {
+    private static int setClientValue(CommandSource src, SightChangeMessage.ChangeType type, float level, float range, Collection<GameProfile> targets) {
+        int i = 0;
+        GameProfile ls = null;
+        AmetropiaManager manager = AmetropiaManager.getInstance();
+        for (GameProfile target : targets) {
+            ServerPlayerEntity serverplayerentity = src.getServer().getPlayerList().getPlayer(target.getId());
+
+            switch (type) {
+                case ALL:
+                    manager.setPlayerStateLevel(serverplayerentity, level);
+                    manager.setPlayerStateRange(serverplayerentity, range);
+                    break;
+                case LEVEL:
+                    manager.setPlayerStateLevel(serverplayerentity, level);
+                    break;
+                case RANGE:
+                    manager.setPlayerStateRange(serverplayerentity, range);
+                    break;
+            }
+
+            PacketHandler.sendSightChangePacket(serverplayerentity, type, level, range);
+            i++;
+            ls = target;
+        }
+
+
+        return i;
+    }
+
+   /* private static int setClientValue(CommandSource src, AmetropiaType type, float level, Collection<GameProfile> targets) {
         int i = 0;
 
         boolean changeFlg = type != null;
@@ -90,5 +117,5 @@ public class SightCommand {
         }
         return i;
     }
-
+*/
 }

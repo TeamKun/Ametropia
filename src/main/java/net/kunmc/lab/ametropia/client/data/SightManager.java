@@ -1,4 +1,4 @@
-package net.kunmc.lab.ametropia.client;
+package net.kunmc.lab.ametropia.client.data;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.kunmc.lab.ametropia.client.renderer.HyperopiaRenderer;
@@ -7,14 +7,13 @@ import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.kunmc.lab.ametropia.item.GlassesItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix4f;
 
 public class SightManager {
     private static final SightManager INSTANCE = new SightManager();
     private static final Minecraft mc = Minecraft.getInstance();
-    private AmetropiaType type = AmetropiaType.HYPEROPIA;
     private float level;
+    private float range;
     private long lastResize;
 
     public static SightManager getInstance() {
@@ -25,23 +24,29 @@ public class SightManager {
         return level;
     }
 
-    public AmetropiaType getType() {
-        return type;
-    }
-
-    public void setType(AmetropiaType type) {
-        boolean flg = this.type != type;
-        this.type = type;
-        if (flg)
-            resize();
-    }
 
     public boolean isEnable() {
-        return mc.player != null && type != AmetropiaType.NONE && !(mc.player.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof GlassesItem);
+        return mc.player != null && level != 0;
     }
 
     public void setLevel(float level) {
-        this.level = MathHelper.clamp(level, 0, 1);
+        this.level = level;
+    }
+
+    public void setRange(float range) {
+        this.range = range;
+    }
+
+    public float getRange() {
+        return range;
+    }
+
+    public AmetropiaType getTypeByLevel(float level) {
+        return level < 0 ? AmetropiaType.MYOPIA : level > 0 ? AmetropiaType.HYPEROPIA : AmetropiaType.NONE;
+    }
+
+    public AmetropiaType getType() {
+        return getTypeByLevel(getLevel());
     }
 
     public void resize() {
@@ -54,9 +59,9 @@ public class SightManager {
 
     public void render(MatrixStack matrixStack, Matrix4f projectionMatrix, float parTick) {
         if (isEnable()) {
-            if (getType() == AmetropiaType.HYPEROPIA)
+            if (getTypeByLevel(getLevel()) == AmetropiaType.HYPEROPIA)
                 HyperopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
-            else if (getType() == AmetropiaType.MYOPIA)
+            else if (getTypeByLevel(getLevel()) == AmetropiaType.MYOPIA)
                 MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
         }
     }
@@ -64,5 +69,16 @@ public class SightManager {
     public void resizeTick() {
         if (System.currentTimeMillis() - lastResize > 1000 * 60)
             resize();
+    }
+
+    public float getDioptreLevel() {
+        return getLevel() - getDioptre();
+    }
+
+    public float getDioptre() {
+        if (mc.player != null && mc.player.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof GlassesItem) {
+            return GlassesItem.getDioptre(mc.player.getItemBySlot(EquipmentSlotType.HEAD));
+        }
+        return 0;
     }
 }

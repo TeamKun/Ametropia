@@ -1,6 +1,6 @@
 package net.kunmc.lab.ametropia.mixin.client;
 
-import net.kunmc.lab.ametropia.client.SightManager;
+import net.kunmc.lab.ametropia.client.data.SightManager;
 import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.minecraft.client.gui.overlay.DebugOverlayGui;
 import org.spongepowered.asm.mixin.Mixin;

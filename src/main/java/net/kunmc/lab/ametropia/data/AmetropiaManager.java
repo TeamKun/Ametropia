@@ -59,25 +59,25 @@ public class AmetropiaManager implements INBTSerializable<CompoundNBT> {
     public AmetropiaState getPlayerState(PlayerEntity player) {
         UUID id = player.getGameProfile().getId();
         if (!playerStates.containsKey(id))
-            playerStates.put(id, new AmetropiaState(AmetropiaType.NONE, 0));
+            playerStates.put(id, new AmetropiaState(0, 0));
 
         return playerStates.get(id);
     }
 
-    public void setPlayerStateType(PlayerEntity player, AmetropiaType type) {
+    public void setPlayerStateRange(PlayerEntity player, float range) {
         UUID id = player.getGameProfile().getId();
 
         if (!playerStates.containsKey(id))
-            playerStates.put(id, new AmetropiaState(AmetropiaType.NONE, 0));
+            playerStates.put(id, new AmetropiaState(0, range));
 
-        playerStates.get(id).setType(type);
+        playerStates.get(id).setRange(range);
     }
 
     public void setPlayerStateLevel(PlayerEntity player, float level) {
         UUID id = player.getGameProfile().getId();
 
         if (!playerStates.containsKey(id))
-            playerStates.put(id, new AmetropiaState(AmetropiaType.NONE, 0));
+            playerStates.put(id, new AmetropiaState(level, 0));
 
         playerStates.get(id).setLevel(level);
     }

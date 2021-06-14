@@ -1,10 +1,9 @@
 package net.kunmc.lab.ametropia.client.renderer;
 
-import net.kunmc.lab.ametropia.client.SightManager;
+import net.kunmc.lab.ametropia.client.data.SightManager;
 import net.kunmc.lab.ametropia.client.shader.MyopiaShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.util.math.vector.Vector3d;
 
 public class MyopiaRenderer extends ShaderBaseRenderer<MyopiaShader> {
     private static final MyopiaRenderer INSTANCE = new MyopiaRenderer();
@@ -24,7 +23,7 @@ public class MyopiaRenderer extends ShaderBaseRenderer<MyopiaShader> {
     public void setter(Framebuffer framebuffer, float parTick) {
         getShader().setPosition(mc.player.getEyePosition(parTick));
 
-        getShader().setLevel(SightManager.getInstance().getLevel());
+        getShader().setLevel(-SightManager.getInstance().getDioptreLevel());
     }
 }
 
