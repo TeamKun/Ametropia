@@ -37,7 +37,7 @@ vec3 bulerd(float par, float dist){
     vec3 base = org;
     float avgc=1;
 
-   /* for (float x = -samplete; x < samplete; x+=skiped){
+    for (float x = -samplete; x < samplete; x+=skiped){
         for (float y = -samplete; y < samplete; y+=skiped){
             vec2 spp=texCoord + vec2(oneTexel.x*x, oneTexel.y*y);
 
@@ -51,7 +51,7 @@ vec3 bulerd(float par, float dist){
             }
             avgc++;
         }
-    }*/
+    }
 
     base/=avgc;
     return base;

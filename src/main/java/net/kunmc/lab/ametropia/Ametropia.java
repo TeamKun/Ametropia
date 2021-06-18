@@ -4,6 +4,8 @@ import net.kunmc.lab.ametropia.client.handler.ClientHandler;
 import net.kunmc.lab.ametropia.client.handler.RenderHandler;
 import net.kunmc.lab.ametropia.client.shader.HyperopiaShader;
 import net.kunmc.lab.ametropia.client.shader.MyopiaShader;
+import net.kunmc.lab.ametropia.client.shader.MyopiaXShader;
+import net.kunmc.lab.ametropia.client.shader.MyopiaYShader;
 import net.kunmc.lab.ametropia.handler.ServerHandler;
 import net.kunmc.lab.ametropia.packet.PacketHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,7 +23,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 @Mod(Ametropia.MODID)
 public class Ametropia {
@@ -63,5 +64,8 @@ public class Ametropia {
         MinecraftForge.EVENT_BUS.register(ClientHandler.class);
         HyperopiaShader.getInstance().init();
         MyopiaShader.getInstance().init();
+
+        MyopiaXShader.getInstance().init();
+        MyopiaYShader.getInstance().init();
     }
 }

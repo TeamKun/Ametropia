@@ -4,7 +4,7 @@ license="MIT License"
 [[mods]]
 modId="ametropia"
 version="${file.jarVersion}"
-displayName="Ametropia"
+displayName="Ametropia Limitless"
 credits="KUN Dev Lab"
 authors="MORIMORI0317"
 description='''イキスギた遠視近視MOD'''
