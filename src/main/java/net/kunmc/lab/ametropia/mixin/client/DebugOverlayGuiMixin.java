@@ -15,6 +15,6 @@ public class DebugOverlayGuiMixin {
     @Inject(method = "getGameInformation", at = @At("RETURN"), cancellable = true)
     private void getGameInformation(CallbackInfoReturnable<List<String>> cir) {
         SightManager manager = SightManager.getInstance();
-        cir.getReturnValue().add("Ametropia Info: [" + "Mode: " + manager.getType().getComponent().getString() + (manager.getType() == AmetropiaType.NONE ? "" : ", Level: " + manager.getLevel()) + "]");
+        cir.getReturnValue().add("Ametropia Info: [" + (manager.getType() == AmetropiaType.NONE ? manager.getType().getComponent().getString() : "Dioptre: " + manager.getLevel()) + "(" + manager.getType().getComponent().getString() + "), Range: " + manager.getRange() + "]");
     }
 }

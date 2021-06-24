@@ -10,6 +10,8 @@ public class MyopiaShader extends BaseShader {
     private ShaderDefault positionUniform;
 
     private ShaderDefault level;
+    private ShaderDefault range;
+    private ShaderDefault renderDistance;
 
     public static MyopiaShader getInstance() {
         return INSTANCE;
@@ -17,7 +19,7 @@ public class MyopiaShader extends BaseShader {
 
     @Override
     public ResourceLocation getShaderLocation() {
-        return new ResourceLocation(Ametropia.MODID, "myopia");
+        return new ResourceLocation(Ametropia.MODID, "myopia_col");
     }
 
     @Override
@@ -26,6 +28,8 @@ public class MyopiaShader extends BaseShader {
         positionUniform = shaderInstance.safeGetUniform("pos");
 
         level = shaderInstance.safeGetUniform("level");
+        range = shaderInstance.safeGetUniform("range");
+        renderDistance = shaderInstance.safeGetUniform("renderDistance");
     }
 
     public void setPosition(Vector3d value) {
@@ -34,5 +38,13 @@ public class MyopiaShader extends BaseShader {
 
     public void setLevel(float value) {
         level.set(value);
+    }
+
+    public void setRange(float value) {
+        this.range.set(value);
+    }
+
+    public void setRenderDistance(float value) {
+        this.renderDistance.set(value);
     }
 }

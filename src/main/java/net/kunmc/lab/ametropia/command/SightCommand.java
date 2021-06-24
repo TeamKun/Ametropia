@@ -18,7 +18,8 @@ public class SightCommand {
     public static void register(CommandDispatcher<CommandSource> d) {
         d.register(Commands.literal(Ametropia.MODID).requires((source) -> source.hasPermission(2))
                 .then(Commands.argument("targets", GameProfileArgument.gameProfile())
-                        .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg()).executes((context) -> setClientValue(context.getSource(), SightChangeMessage.ChangeType.LEVEL, FloatArgumentType.getFloat(context, "value"), 0, GameProfileArgument.getGameProfiles(context, "targets")))))));
+                        .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg()).executes((context) -> setClientValue(context.getSource(), SightChangeMessage.ChangeType.LEVEL, FloatArgumentType.getFloat(context, "value"), 0, GameProfileArgument.getGameProfiles(context, "targets")))))
+                        .then(Commands.literal("range").then(Commands.argument("value", FloatArgumentType.floatArg(0)).executes((context) -> setClientValue(context.getSource(), SightChangeMessage.ChangeType.RANGE, 0, FloatArgumentType.getFloat(context, "value"), GameProfileArgument.getGameProfiles(context, "targets")))))));
       /*  d.register(Commands.literal(Ametropia.MODID).requires((source) -> source.hasPermission(2))
                 .then(Commands.argument("targets", GameProfileArgument.gameProfile())
                         .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg(0, 1)).executes((context) -> setClientValue(context.getSource(), null, FloatArgumentType.getFloat(context, "value"), GameProfileArgument.getGameProfiles(context, "targets")))))

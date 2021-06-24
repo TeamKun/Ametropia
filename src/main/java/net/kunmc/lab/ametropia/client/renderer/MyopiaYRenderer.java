@@ -21,6 +21,8 @@ public class MyopiaYRenderer extends ShaderBaseRenderer<MyopiaYShader> {
     @Override
     public void setter(Framebuffer framebuffer, float parTick) {
         getShader().setPosition(mc.player.getEyePosition(parTick));
-        getShader().setLevel(-SightManager.getInstance().getDioptreLevel());
+        SightManager manager = SightManager.getInstance();
+        getShader().setLevel(-manager.getDioptreLevel());
+        getShader().setRange(manager.getRange());
     }
 }

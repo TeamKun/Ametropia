@@ -3,8 +3,6 @@ package net.kunmc.lab.ametropia.client.data;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.kunmc.lab.ametropia.client.renderer.HyperopiaRenderer;
 import net.kunmc.lab.ametropia.client.renderer.MyopiaRenderer;
-import net.kunmc.lab.ametropia.client.renderer.MyopiaXRenderer;
-import net.kunmc.lab.ametropia.client.renderer.MyopiaYRenderer;
 import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.kunmc.lab.ametropia.item.GlassesItem;
 import net.minecraft.client.Minecraft;
@@ -55,6 +53,9 @@ public class SightManager {
         if (mc.level != null) {
             MyopiaRenderer.getInstance().resized();
             HyperopiaRenderer.getInstance().resized();
+
+            //  MyopiaXRenderer.getInstance().resized();
+            //  MyopiaYRenderer.getInstance().resized();
         }
         lastResize = System.currentTimeMillis();
     }
@@ -64,9 +65,9 @@ public class SightManager {
             if (getTypeByLevel(getLevel()) == AmetropiaType.HYPEROPIA)
                 HyperopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
             else if (getTypeByLevel(getLevel()) == AmetropiaType.MYOPIA) {
-                MyopiaXRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
-                MyopiaYRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
-//MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+                // MyopiaYRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+                //MyopiaXRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+                MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
             }
         }
     }

@@ -34,4 +34,8 @@ public class RenderUtil {
         return model;
     }
 
+    public static int getRenderDistance() {
+        return Minecraft.getInstance().options.renderDistance * 16;
+    }
+
 }

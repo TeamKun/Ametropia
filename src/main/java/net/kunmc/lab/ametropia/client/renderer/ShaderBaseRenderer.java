@@ -165,11 +165,6 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
     }
 
     private void updateDepthTexture(final Framebuffer framebuffer) {
-        //   GlStateManager._glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, framebuffer.frameBufferId);
-        //   GlStateManager._glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, depthCopyFbo);
-        //   GL30.glBlitFramebuffer(0, 0, framebuffer.width, framebuffer.height, 0, 0, framebuffer.width, framebuffer.height, GL30.GL_DEPTH_BUFFER_BIT, GL30.GL_NEAREST);
-
-
         GlStateManager._glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, framebuffer.frameBufferId);
         GlStateManager._glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, depthCopyFbo);
         GL30.glBlitFramebuffer(0, 0, framebuffer.width, framebuffer.height,
