@@ -30,9 +30,11 @@ float objectDistance(float depth){
     return dist;
 }
 
-vec3 ikisugiBuler(float dist){
+vec3 ikisugiBuler(float dist, float depth){
     vec3 col = vec3(0, 0, 0);
     float par=(dist-range)/renderDistance;
+    par*=level;
+    par=min(level, par);
     if (dist>=range){
         col=vec3(par, 0, 0);
     }
@@ -42,8 +44,6 @@ vec3 ikisugiBuler(float dist){
 
 void main() {
     float depth = texture2D(depthTex, texCoord).r;
-
     float dist = objectDistance(depth);
-    float bulerPar=clamp(dist/100, 0, 1);
-    gl_FragColor = vec4(ikisugiBuler(dist), 0);
+    gl_FragColor = vec4(ikisugiBuler(dist, depth), 0);
 }

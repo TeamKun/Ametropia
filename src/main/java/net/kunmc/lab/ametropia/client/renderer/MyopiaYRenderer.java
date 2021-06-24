@@ -2,6 +2,7 @@ package net.kunmc.lab.ametropia.client.renderer;
 
 import net.kunmc.lab.ametropia.client.data.SightManager;
 import net.kunmc.lab.ametropia.client.shader.MyopiaYShader;
+import net.kunmc.lab.ametropia.client.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Framebuffer;
 
@@ -24,5 +25,6 @@ public class MyopiaYRenderer extends ShaderBaseRenderer<MyopiaYShader> {
         SightManager manager = SightManager.getInstance();
         getShader().setLevel(-manager.getDioptreLevel());
         getShader().setRange(manager.getRange());
+        getShader().setRenderDistance(RenderUtil.getRenderDistance());
     }
 }

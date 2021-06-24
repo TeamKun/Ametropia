@@ -11,6 +11,7 @@ public class MyopiaXShader extends BaseShader {
 
     private ShaderDefault level;
     private ShaderDefault range;
+    private ShaderDefault renderDistance;
 
     public static MyopiaXShader getInstance() {
         return INSTANCE;
@@ -28,6 +29,7 @@ public class MyopiaXShader extends BaseShader {
 
         level = shaderInstance.safeGetUniform("level");
         range = shaderInstance.safeGetUniform("range");
+        renderDistance = shaderInstance.safeGetUniform("renderDistance");
     }
 
     public void setPosition(Vector3d value) {
@@ -41,5 +43,9 @@ public class MyopiaXShader extends BaseShader {
 
     public void setRange(float value) {
         this.range.set(value);
+    }
+
+    public void setRenderDistance(float value) {
+        this.renderDistance.set(value);
     }
 }

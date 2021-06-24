@@ -9,6 +9,8 @@ uniform vec2 InSize;
 uniform vec3 pos;
 
 uniform float level;
+uniform float range;
+uniform float renderDistance;
 
 varying vec2 texCoord;
 varying vec2 oneTexel;
@@ -28,36 +30,42 @@ float objectDistance(float depth){
     return dist;
 }
 
-vec3 ikisugiBuler(float blevel, float dist, float bdepth){
+vec3 ikisugiBuler(float dist, float depth){
     vec3 col = vec3(0., 0., 0.);
     float weight_total = 0.;
-    float ignoreDist=60-(30*blevel);
 
-    float blur =10*blevel*level;
-    if (bdepth < 1||dist>=ignoreDist){
-        for (float x = -blur; x <= blur; x += 1.){
-            //for (float y = -blur; y <= blur; y += 1.){
-            vec2 colp=vec2(texCoord+vec2(x*oneTexel.x, 0.));
-            float depth = texture2D(depthTex, colp).r;
-            float ud=objectDistance(depth);
-            //vec2 colp=vec2(texCoord+vec2(0, y*oneTexel.y));
-            if ((dist>=ignoreDist&&ignoreDist<=ud)||dist<=ud){
-                float distance_normalized = abs(x / blur);
-                float weight = exp(-0.5 * pow(distance_normalized, 2.) * 5.0);
-                weight_total += weight;
-                col += texture(DiffuseSampler, colp).rgb * weight;
-            }
+    float par=(dist-range)/renderDistance;
+    par*=level;
+    par=min(level, par);
+
+    float blur =10*par;
+
+    //bdepth < 1
+    for (float x = -blur; x <= blur; x += 1.){
+        //for (float y = -blur; y <= blur; y += 1.){
+        vec2 colp=vec2(texCoord+vec2(x*oneTexel.x, 0.));
+        //vec2 colp=vec2(texCoord+vec2(0, y*oneTexel.y));
+        float depth = texture2D(depthTex, colp).r;
+        float ud=objectDistance(depth);
+        if ((dist>=range&&range<=ud)||dist<=ud){
+            float distance_normalized = abs(x / blur);
+            //  float distance_normalized = abs(y / blur);
+            float weight = exp(-0.5 * pow(distance_normalized, 2.) * 5.0);
+            weight_total += weight;
+            col += texture(DiffuseSampler, colp).rgb * weight;
         }
     }
     col /= weight_total;
-
     return col;
 }
 
 void main() {
     float depth = texture2D(depthTex, texCoord).r;
-
     float dist = objectDistance(depth);
-    float bulerPar=clamp(dist/100, 0, 1);
-    gl_FragColor = vec4(ikisugiBuler(bulerPar*10, dist, depth), 0);
+    if (dist<range||depth >= 1){
+        vec4 orgColor= texture(DiffuseSampler, texCoord);
+        gl_FragColor=vec4(orgColor.rgb, 0);
+        return;
+    }
+    gl_FragColor = vec4(ikisugiBuler(dist, depth), 0);
 }
