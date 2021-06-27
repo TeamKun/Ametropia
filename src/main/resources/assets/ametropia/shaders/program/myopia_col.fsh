@@ -32,9 +32,7 @@ float objectDistance(float depth){
 
 vec3 ikisugiBuler(float dist, float depth){
     vec3 col = vec3(0, 0, 0);
-    float par=(dist-range)/renderDistance;
-    par*=level;
-    par=min(level, par);
+    float par=clamp((dist-range)/(range/2), 0, 1);//     (dist-range)/renderDistance;
     if (dist>=range){
         col=vec3(par, 0, 0);
     }

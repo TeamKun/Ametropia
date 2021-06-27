@@ -1,7 +1,6 @@
 package net.kunmc.lab.ametropia.mixin.client;
 
 import net.kunmc.lab.ametropia.client.data.SightManager;
-import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.minecraft.client.gui.overlay.DebugOverlayGui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +14,7 @@ public class DebugOverlayGuiMixin {
     @Inject(method = "getGameInformation", at = @At("RETURN"), cancellable = true)
     private void getGameInformation(CallbackInfoReturnable<List<String>> cir) {
         SightManager manager = SightManager.getInstance();
-        cir.getReturnValue().add("Ametropia Info: [" + (manager.getType() == AmetropiaType.NONE ? manager.getType().getComponent().getString() : "Dioptre: " + manager.getLevel()) + "(" + manager.getType().getComponent().getString() + "), Range: " + manager.getRange() + "]");
+        String levelInf = "Dioptre: " + manager.getDioptreLevel() + (manager.getLevel() != manager.getDioptreLevel() ? "[" + manager.getLevel() + (manager.getDioptre() >= 0 ? "+" : "") + manager.getDioptre() + "]" : "") + "(" + manager.getType().getComponent().getString() + ")";
+        cir.getReturnValue().add("Ametropia Info: [" + levelInf + ", Range: " + manager.getRange() + "]");
     }
 }

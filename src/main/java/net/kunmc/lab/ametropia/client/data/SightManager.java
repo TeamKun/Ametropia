@@ -48,7 +48,7 @@ public class SightManager {
     }
 
     public AmetropiaType getType() {
-        return getTypeByLevel(getLevel());
+        return getTypeByLevel(getDioptreLevel());
     }
 
     public void resize() {
@@ -64,12 +64,12 @@ public class SightManager {
 
     public void render(MatrixStack matrixStack, Matrix4f projectionMatrix, float parTick) {
         if (isEnable()) {
-            if (getTypeByLevel(getLevel()) == AmetropiaType.HYPEROPIA)
+            if (getType() == AmetropiaType.HYPEROPIA)
                 HyperopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
-            else if (getTypeByLevel(getLevel()) == AmetropiaType.MYOPIA) {
-                MyopiaXRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+            else if (getType() == AmetropiaType.MYOPIA) {
                 MyopiaYRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
-                //  MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+                MyopiaXRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+                //    MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
             }
         }
     }
@@ -80,7 +80,7 @@ public class SightManager {
     }
 
     public float getDioptreLevel() {
-        return getLevel() - getDioptre();
+        return getLevel() + getDioptre();
     }
 
     public float getDioptre() {
