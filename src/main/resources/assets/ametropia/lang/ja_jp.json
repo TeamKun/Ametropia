@@ -2,6 +2,8 @@
   "_comment.i": "item",
   "item.ametropia.glasses": "眼鏡",
   "item.ametropia.glasses.dioptre.desc": "度数: %sD",
+  "_comment.b": "block",
+  "block.ametropia.sight_test_chart": "視力検査台",
   "_comment.c": "command",
   "commands.sight.type.success.single": "プレイヤー %s の視力を %s に変更しました",
   "commands.sight.type.success.multiple": "%s 人のプレイヤーの視力を %s に変更しました",

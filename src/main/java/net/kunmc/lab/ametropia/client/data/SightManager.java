@@ -1,10 +1,8 @@
 package net.kunmc.lab.ametropia.client.data;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.kunmc.lab.ametropia.client.renderer.HyperopiaRenderer;
-import net.kunmc.lab.ametropia.client.renderer.MyopiaRenderer;
-import net.kunmc.lab.ametropia.client.renderer.MyopiaXRenderer;
-import net.kunmc.lab.ametropia.client.renderer.MyopiaYRenderer;
+import net.kunmc.lab.ametropia.client.renderer.*;
+import net.kunmc.lab.ametropia.client.shader.*;
 import net.kunmc.lab.ametropia.data.AmetropiaType;
 import net.kunmc.lab.ametropia.item.GlassesItem;
 import net.minecraft.client.Minecraft;
@@ -54,19 +52,24 @@ public class SightManager {
     public void resize() {
         if (mc.level != null) {
             MyopiaRenderer.getInstance().resized();
-            //  HyperopiaRenderer.getInstance().resized();
+            HyperopiaRenderer.getInstance().resized();
 
             MyopiaXRenderer.getInstance().resized();
             MyopiaYRenderer.getInstance().resized();
+
+            HyperopiaXRenderer.getInstance().resized();
+            HyperopiaYRenderer.getInstance().resized();
         }
         lastResize = System.currentTimeMillis();
     }
 
     public void render(MatrixStack matrixStack, Matrix4f projectionMatrix, float parTick) {
         if (isEnable()) {
-            if (getType() == AmetropiaType.HYPEROPIA)
+            if (getType() == AmetropiaType.HYPEROPIA) {
                 HyperopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
-            else if (getType() == AmetropiaType.MYOPIA) {
+                //   HyperopiaYRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+                //    HyperopiaXRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
+            } else if (getType() == AmetropiaType.MYOPIA) {
                 MyopiaYRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
                 MyopiaXRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
                 //    MyopiaRenderer.getInstance().doRender(matrixStack, projectionMatrix, parTick);
@@ -89,4 +92,15 @@ public class SightManager {
         }
         return 0;
     }
+
+    public void init() {
+        HyperopiaShader.getInstance().init();
+        MyopiaShader.getInstance().init();
+
+        MyopiaXShader.getInstance().init();
+        MyopiaYShader.getInstance().init();
+        HyperopiaXShader.getInstance().init();
+        HyperopiaYShader.getInstance().init();
+    }
+
 }

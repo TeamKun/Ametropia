@@ -1,11 +1,8 @@
 package net.kunmc.lab.ametropia;
 
+import net.kunmc.lab.ametropia.client.data.SightManager;
 import net.kunmc.lab.ametropia.client.handler.ClientHandler;
 import net.kunmc.lab.ametropia.client.handler.RenderHandler;
-import net.kunmc.lab.ametropia.client.shader.HyperopiaShader;
-import net.kunmc.lab.ametropia.client.shader.MyopiaShader;
-import net.kunmc.lab.ametropia.client.shader.MyopiaXShader;
-import net.kunmc.lab.ametropia.client.shader.MyopiaYShader;
 import net.kunmc.lab.ametropia.handler.ServerHandler;
 import net.kunmc.lab.ametropia.packet.PacketHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,10 +59,7 @@ public class Ametropia {
     private void doClientStuff(final FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(RenderHandler.class);
         MinecraftForge.EVENT_BUS.register(ClientHandler.class);
-        HyperopiaShader.getInstance().init();
-        MyopiaShader.getInstance().init();
 
-        MyopiaXShader.getInstance().init();
-        MyopiaYShader.getInstance().init();
+        SightManager.getInstance().init();
     }
 }
