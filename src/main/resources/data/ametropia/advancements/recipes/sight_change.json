@@ -2,7 +2,8 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "ametropia:glasses"
+      "ametropia:glasses",
+      "ametropia:sight_test_chart"
     ]
   },
   "criteria": {

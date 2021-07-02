@@ -1,14 +1,21 @@
 package net.kunmc.lab.ametropia.client.shader;
 
+import net.kunmc.lab.ametropia.Ametropia;
 import net.minecraft.client.shader.ShaderDefault;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 
-public abstract class SightBaseShader extends BaseShader{
+public class SightBaseShader extends BaseShader {
+    private final String name;
     private ShaderDefault positionUniform;
 
     private ShaderDefault level;
     private ShaderDefault range;
     private ShaderDefault renderDistance;
+
+    public SightBaseShader(String name) {
+        this.name = name;
+    }
 
     @Override
     public void handleShaderLoad() {
@@ -34,5 +41,10 @@ public abstract class SightBaseShader extends BaseShader{
 
     public void setRenderDistance(float value) {
         this.renderDistance.set(value);
+    }
+
+    @Override
+    public ResourceLocation getShaderLocation() {
+        return new ResourceLocation(Ametropia.MODID, name);
     }
 }

@@ -30,7 +30,7 @@ float objectDistance(float depth){
     return dist;
 }
 float getPar(float dist){
-    return clamp((dist-range)/(range/1.5), 0, 1);
+    return 1- clamp((dist)/(range), 0, 1);
 }
 
 vec3 bulered(float par){
@@ -46,17 +46,16 @@ vec3 bulered(float par){
 
         float depth2 = texture2D(depthTex, colp).r;
         float ud=objectDistance(depth2);
-        if (ud>range&&getPar(ud)<=par){
+      //  if (ud>range&&getPar(ud)<=par){
             float distance_normalized = abs(x / blur);
             //  float distance_normalized = abs(y / blur);
             float weight = exp(-0.5 * pow(distance_normalized, 2.) * 5.0);
             weight_total += weight;
             col += texture(DiffuseSampler, colp).rgb * weight;
-        }
+      //  }
     }
     col /= weight_total;
-
-    return col;
+    return col;//vec3(par, 1, 0);
 }
 void main() {
     float depth = texture2D(depthTex, texCoord).r;
@@ -66,9 +65,10 @@ void main() {
 
     vec3 bcol=vec3(0, 0, 0);
 
-    if (dist<range){
+    if (dist>range){
         bcol=texture(DiffuseSampler, texCoord).rgb;
     } else {
+        //   bcol=bulered(par*level);
         bcol=bulered(par*level);
     }
 

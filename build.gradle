@@ -17,7 +17,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 version = '1.0'
 group = 'net.kunmc.lab.ametropia'
-archivesBaseName = 'ametropia'
+archivesBaseName = 'Ametropia'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 

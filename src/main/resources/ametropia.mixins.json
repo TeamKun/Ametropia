@@ -5,7 +5,6 @@
   "refmap": "ametropia.refmap.json",
   "client": [
     "client.DebugOverlayGuiMixin",
-    "client.GameRendererMixin",
     "client.MinecraftMixin"
   ],
   "mixins": [

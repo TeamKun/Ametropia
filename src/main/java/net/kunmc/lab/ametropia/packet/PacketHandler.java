@@ -12,7 +12,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class PacketHandler {
     public static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(Ametropia.MODID, Ametropia.MODID + "_channel")).clientAcceptedVersions(a -> true).serverAcceptedVersions(a -> true).networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
-    private static final ResourceLocation GLASSES_RECEP = new ResourceLocation(Ametropia.MODID, "recipes/glasses");
+    private static final ResourceLocation GLASSES_RECEP = new ResourceLocation(Ametropia.MODID, "recipes/sight_change");
     private static int number = 0;
 
     public static void init() {
