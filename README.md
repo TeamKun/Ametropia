@@ -20,4 +20,10 @@
  申し訳ない程度の視力検査台（機能なし）  
 ![視力検査台](https://cdn.discordapp.com/attachments/358878159615164416/861192842809442314/unknown.png)
 
+# 画像
+ 近視  
+![近視](https://cdn.discordapp.com/attachments/358878159615164416/861214840202854421/2021-07-04_20.45.49.png)
+
+ 遠視  
+![遠視](https://cdn.discordapp.com/attachments/358878159615164416/861214842002079784/2021-07-04_20.45.42.png)
 
