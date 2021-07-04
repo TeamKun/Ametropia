@@ -14,10 +14,10 @@
 /give @a ametropia:glasses{Dioptre:1.9f}
           
 # レシピ
-眼鏡  
+眼鏡（元の視力＋眼鏡の視力）  
 ![眼鏡](https://cdn.discordapp.com/attachments/797220314983301150/852956059895070720/unknown.png)
 
-視力検査  
+ 申し訳ない程度の視力検査台（機能なし）  
 ![視力検査台](https://cdn.discordapp.com/attachments/358878159615164416/861192842809442314/unknown.png)
 
 
