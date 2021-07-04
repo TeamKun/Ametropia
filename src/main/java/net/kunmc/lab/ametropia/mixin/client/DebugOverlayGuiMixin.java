@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mixin(DebugOverlayGui.class)
 public class DebugOverlayGuiMixin {
-    @Inject(method = "getGameInformation", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getGameInformation", at = @At("RETURN"))
     private void getGameInformation(CallbackInfoReturnable<List<String>> cir) {
         SightManager manager = SightManager.getInstance();
         String levelInf = "Dioptre: " + manager.getDioptreLevel() + (manager.getLevel() != manager.getDioptreLevel() ? "[" + manager.getLevel() + (manager.getDioptre() >= 0 ? "+" : "") + manager.getDioptre() + "]" : "") + "(" + manager.getType().getComponent().getString() + ")";

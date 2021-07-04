@@ -28,7 +28,7 @@ public class SightManager {
 
 
     public boolean isEnable() {
-        return mc.player != null && level != 0;
+        return mc.player != null && (level > 0.1f || level < -0.1f);
     }
 
     public void setLevel(float level) {

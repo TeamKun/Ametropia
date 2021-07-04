@@ -11,6 +11,8 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.GameProfileArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.TextComponentUtils;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Collection;
 
@@ -20,13 +22,7 @@ public class SightCommand {
                 .then(Commands.argument("targets", GameProfileArgument.gameProfile())
                         .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg()).executes((context) -> setClientValue(context.getSource(), SightChangeMessage.ChangeType.LEVEL, FloatArgumentType.getFloat(context, "value"), 0, GameProfileArgument.getGameProfiles(context, "targets")))))
                         .then(Commands.literal("range").then(Commands.argument("value", FloatArgumentType.floatArg(0)).executes((context) -> setClientValue(context.getSource(), SightChangeMessage.ChangeType.RANGE, 0, FloatArgumentType.getFloat(context, "value"), GameProfileArgument.getGameProfiles(context, "targets")))))));
-      /*  d.register(Commands.literal(Ametropia.MODID).requires((source) -> source.hasPermission(2))
-                .then(Commands.argument("targets", GameProfileArgument.gameProfile())
-                        .then(Commands.literal("level").then(Commands.argument("value", FloatArgumentType.floatArg(0, 1)).executes((context) -> setClientValue(context.getSource(), null, FloatArgumentType.getFloat(context, "value"), GameProfileArgument.getGameProfiles(context, "targets")))))
-                        .then(Commands.literal("type").then(Commands.literal("none").executes((context) -> setClientValue(context.getSource(), AmetropiaType.NONE, -1, GameProfileArgument.getGameProfiles(context, "targets"))))
-                                .then(Commands.literal("hyperopia").executes((context) -> setClientValue(context.getSource(), AmetropiaType.HYPEROPIA, -1, GameProfileArgument.getGameProfiles(context, "targets"))))
-                                .then(Commands.literal("myopia").executes((context) -> setClientValue(context.getSource(), AmetropiaType.MYOPIA, -1, GameProfileArgument.getGameProfiles(context, "targets")))))
-                        .then(Commands.literal("random").executes((context) -> setRandomClientValue(context.getSource(), GameProfileArgument.getGameProfiles(context, "targets"))))));*/
+        //    .then(Commands.literal("random"))));
     }
 
     private static int setClientValue(CommandSource src, SightChangeMessage.ChangeType type, float level, float range, Collection<GameProfile> targets) {
@@ -54,10 +50,41 @@ public class SightCommand {
             ls = target;
         }
 
+        boolean randFlag = type == SightChangeMessage.ChangeType.RANGE;
 
+        if (i == 1) {
+            src.sendSuccess(new TranslationTextComponent("commands.sight." + (randFlag ? "range" : "level") + ".success.single", TextComponentUtils.getDisplayName(ls), randFlag ? range : level), true);
+        } else {
+            src.sendSuccess(new TranslationTextComponent("commands.sight." + (randFlag ? "range" : "level") + ".success.multiple", i, randFlag ? range : level), true);
+        }
         return i;
     }
 
+   /* private static int setRandom(CommandSource src, Collection<GameProfile> targets) {
+        int i = 0;
+        AmetropiaManager manager = AmetropiaManager.getInstance();
+
+        GameProfile ls = null;
+        for (GameProfile target : targets) {
+            ServerPlayerEntity serverplayerentity = src.getServer().getPlayerList().getPlayer(target.getId());
+            Random r = new Random();
+
+            float level = r.nextFloat();
+       //     manager.setPlayerStateType(serverplayerentity, type);
+         //   manager.setPlayerStateLevel(serverplayerentity, level);
+
+        //    PacketHandler.sendSightChangePacket(serverplayerentity, type, level);
+
+            i++;
+            ls = target;
+        }
+        if (i == 1) {
+            src.sendSuccess(new TranslationTextComponent("commands.sight.random.success.single", TextComponentUtils.getDisplayName(ls)), true);
+        } else {
+            src.sendSuccess(new TranslationTextComponent("commands.sight.random.success.multiple", i), true);
+        }
+        return i;
+    }*/
    /* private static int setClientValue(CommandSource src, AmetropiaType type, float level, Collection<GameProfile> targets) {
         int i = 0;
 

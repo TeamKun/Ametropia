@@ -52,11 +52,10 @@ public abstract class ShaderBaseRenderer<T extends BaseShader> {
         invertedProjectionMatrix.invert();
 
         getShader().setInverseProjectionMatrix(invertedProjectionMatrix);
-        getShader().setDiffuseSampler(mc.getMainRenderTarget()::getColorTextureId);
+        getShader().setDiffuseSampler(framebuffer::getColorTextureId);
         getShader().setInSize(framebuffer.width, framebuffer.height);
 
         setter(framebuffer, parTick);
-
 
         RESET_BLEND_STATE.apply();
 

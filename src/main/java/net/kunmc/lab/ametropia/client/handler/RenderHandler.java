@@ -16,9 +16,9 @@ public class RenderHandler {
         SightManager manager = SightManager.getInstance();
         manager.render(e.getMatrixStack(), e.getProjectionMatrix(), e.getPartialTicks());
         manager.resizeTick();
-        if (!noInjected()) {
+        if (manager.isEnable() && !noInjected())
             RenderSystem.activeTexture(33984);
-        }
+
     }
 
     private static boolean noInjected() {

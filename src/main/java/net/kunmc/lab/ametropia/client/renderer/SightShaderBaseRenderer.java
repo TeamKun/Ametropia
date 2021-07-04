@@ -25,7 +25,7 @@ public class SightShaderBaseRenderer extends ShaderBaseRenderer<SightBaseShader>
     public void setter(Framebuffer framebuffer, float parTick) {
         getShader().setPosition(mc.player.getEyePosition(parTick));
         SightManager manager = SightManager.getInstance();
-        getShader().setLevel(manager.getDioptreLevel() * (negative ? -1 : 1));
+        getShader().setLevel((manager.getDioptreLevel() * 10) * (negative ? -1 : 1));
         getShader().setRange(manager.getRange());
         getShader().setRenderDistance(RenderUtil.getRenderDistance());
     }
